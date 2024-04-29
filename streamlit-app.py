@@ -1,5 +1,4 @@
 import streamlit as st
-import yaml
 from streamlit_authenticator.authenticate import Authenticate
 from streamlit_authenticator.utilities.hasher import Hasher
 
