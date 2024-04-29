@@ -1,0 +1,25 @@
+FROM gcr.io/google-appengine/python
+
+# Mettre à jour le système et installer Python 3.9
+RUN apt-get update && \
+    apt install software-properties-common \
+    add-apt-repository ppa:deadsnakes/ppa \
+    apt update \
+    apt-get install -y python3.9 python3.9-dev && \
+    apt-get clean
+
+# Créer un environnement virtuel avec Python 3.9
+RUN virtualenv /env -p python3.9
+
+# Définir les variables d'environnement pour l'environnement virtuel
+ENV VIRTUAL_ENV /env
+ENV PATH /env/bin:$PATH
+
+# Reste du Dockerfile inchangé
+ADD requirements.txt /app/
+ADD config.yaml /app/
+RUN /env/bin/python -m pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+ADD . /app
+ENTRYPOINT [ "streamlit", "run", "streamlit-app.py", "--server.port", "8080" ]

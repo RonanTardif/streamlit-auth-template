@@ -1,0 +1,27 @@
+FROM python:3.9
+
+# Ref:
+# * https://github.com/GoogleCloudPlatform/python-runtime/blob/8cdc91a88cd67501ee5190c934c786a7e91e13f1/README.md#kubernetes-engine--other-docker-hosts
+# * https://github.com/GoogleCloudPlatform/python-runtime/blob/8cdc91a88cd67501ee5190c934c786a7e91e13f1/scripts/testdata/hello_world_golden/Dockerfile
+EXPOSE 8080
+#RUN virtualenv /env -p python3.7
+
+#ENV VIRTUAL_ENV /env
+ENV PATH /env/bin:$PATH
+
+ADD requirements.txt /app/
+ADD config.yaml /app/
+ADD streamlit-app.py /app/
+
+#RUN /env/bin/python -m pip install --upgrade pip
+RUN python -m pip install --upgrade pip
+
+#RUN cd /app
+
+ADD . /app
+RUN cd /app
+RUN pip install -r app/requirements.txt
+
+#ADD . /app
+ENTRYPOINT [ "./app/", "streamlit", "run", "streamlit-app.py", "--server.port", "8080" ]
+#ENTRYPOINT [ "streamlit", "run", "streamlit-app.py", "--server.port", "8080" ]

@@ -1,0 +1,17 @@
+credentials:
+  cookie:
+    expiry_days: 7
+    key: random_signature_key
+    name: random_cookie_name
+  preauthorized:
+    emails:
+    - melsby@gmail.com
+  usernames:
+    admin:
+      email: admin@gmail.com
+      name: Admin
+      password: $2b$12$LZM75E.YarJfTUdQp/7TcuFTDP3VFaUfonH58dije7guE81OoKoym
+    louisvuitton:
+      email: louisvuitton@gmail.com
+      name: Louis Vuitton
+      password: $2b$12$0n7zHPVGMEu6vPTMqXDv4ebvkVb0jCo5x3oPb6pfOeLapwa.8tsqW
